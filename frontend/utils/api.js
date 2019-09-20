@@ -1,2 +1,5 @@
-export const restaurantsURL = 'http://localhost:1337/restaurants'
-export const dishesURL = 'http://localhost:1337/dishes'
+export const apiUrl = process.env.API_URL || `http://localhost:1337`
+
+// Routes
+export const restaurantsURL = `${apiUrl}/restaurants`
+export const dishesURL = `${apiUrl}/dishes`

@@ -1,9 +1,11 @@
 import React from 'react'
 import Head from 'next/head'
-import Link from 'next/link'
+
 import { css, Global } from '@emotion/core'
-import { Container, Nav, NavItem } from 'reactstrap'
+import { Container } from 'reactstrap'
 import PropTypes from 'prop-types'
+
+import Header from './header'
 
 const globalStyle = css`
   a:link {
@@ -31,27 +33,7 @@ function Layout({ children, title }) {
         />
         <script src="https://js.stripe.com/v3" />
       </Head>
-      <header>
-        <Nav className="navbar navbar-dark bg-dark">
-          <NavItem>
-            <Link href="/">
-              <a className="navbar-brand">Home</a>
-            </Link>
-          </NavItem>
-
-          <NavItem className="ml-auto">
-            <Link href="/signin">
-              <a className="nav-link">Sign In</a>
-            </Link>
-          </NavItem>
-
-          <NavItem>
-            <Link href="/signup">
-              <a className="nav-link"> Sign Up</a>
-            </Link>
-          </NavItem>
-        </Nav>
-      </header>
+      <Header />
       <Container>{children}</Container>
     </>
   )
