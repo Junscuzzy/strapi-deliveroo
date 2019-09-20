@@ -6,21 +6,12 @@ import { Container, Nav, NavItem } from 'reactstrap'
 import PropTypes from 'prop-types'
 
 const globalStyle = css`
-  a {
-    color: white !important;
-  }
   a:link {
-    text-decoration: none !important;
-    color: white !important;
+    text-decoration: none;
   }
-  a:hover {
+  a.navbar-brand,
+  a.nav-link {
     color: white;
-  }
-  .card {
-    display: inline-block !important;
-  }
-  .card-columns {
-    column-count: 3;
   }
 `
 
@@ -49,7 +40,7 @@ function Layout({ children, title }) {
           </NavItem>
 
           <NavItem className="ml-auto">
-            <Link href="/signin" className="nav-link">
+            <Link href="/signin">
               <a className="nav-link">Sign In</a>
             </Link>
           </NavItem>

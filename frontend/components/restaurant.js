@@ -10,8 +10,10 @@ import {
 } from 'reactstrap'
 import PropTypes from 'prop-types'
 import Link from 'next/link'
+import slugify from 'slugify'
 
-export default function Restaurant({ id, image, name, description }) {
+export default function Restaurant({ image, name, description }) {
+  console.log({ name, slug: slugify(name) })
   return (
     <Col className="col-4">
       <Card>
@@ -19,7 +21,7 @@ export default function Restaurant({ id, image, name, description }) {
         <CardBody>
           <CardTitle>{name}</CardTitle>
           <CardText>{description}</CardText>
-          <Link as={`/restaurants/${id}`} href={`/restaurants?id=${id}`}>
+          <Link as={`/restaurant/${slugify(name)}`} href="/restaurant/[slug]">
             <Button color="primary" className="btn btn-primary">
               View
             </Button>
@@ -31,7 +33,7 @@ export default function Restaurant({ id, image, name, description }) {
 }
 
 Restaurant.propTypes = {
-  id: PropTypes.number.isRequired,
+  // id: PropTypes.number.isRequired,
   image: PropTypes.shape({
     url: PropTypes.string
   }),
