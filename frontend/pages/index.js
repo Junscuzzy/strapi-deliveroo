@@ -1,16 +1,17 @@
-import { Button, Alert } from "reactstrap";
+import React, { useState } from 'react'
+import { Col, Row } from 'reactstrap'
 
-import Layout from "../components/layout";
+import RestaurantList from '../components/restaurantList'
+import Search from '../components/search'
 
-export default () => {
-	return (
-		<Layout>
-			<div>
-				<Alert color="primary">
-					Hello Project is strapi-next with Bootstrap
-				</Alert>
-				&nbsp; <Button color="primary">Hello from nextjs</Button>
-			</div>
-		</Layout>
-	);
-};
+export default function Index() {
+  const [query, setQuery] = useState('')
+  return (
+    <Row>
+      <Col>
+        <Search query={query} setQuery={val => setQuery(val)} />
+        <RestaurantList search={query} />
+      </Col>
+    </Row>
+  )
+}

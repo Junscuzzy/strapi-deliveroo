@@ -1,9 +1,5 @@
-import Layout from "../components/layout";
+import React from 'react'
 
-export default () => {
-	return (
-		<Layout>
-			<h1>Sign Up</h1>
-		</Layout>
-	);
-};
+export default function SignUp() {
+  return <h1>Sign Up</h1>
+}
