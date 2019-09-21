@@ -11,49 +11,55 @@ function AppProvider({ children }) {
 
   useEffect(() => {
     const cart = Cookies.getJSON('cart')
+    console.log('componentDidUpdateFunction')
+
     // if items in cart, set items and total from cookie
     if (cart) {
       setItems(cart)
       cart.forEach(({ price, quantity }) => setTotal(price * quantity))
+
     }
   }, [])
 
   function addItem(item) {
-    const tmpItem = item
     // check for item already in cart
+    const newItem = items.find(i => i.id === item.id)
+
     // if not in cart, add item if item is found increase quanity ++
-    const newItem = items.find(i => i.id === tmpItem.id)
+    let newItemsArr = []
     if (!newItem) {
-      tmpItem.quantity = 1
-      setItems(items.concat(tmpItem))
-      setTotal(total + tmpItem.price)
+      item.quantity = 1
+      newItemsArr = items.concat(item)
     } else {
-      setItems(
-        items.map(el =>
-          el.id === newItem.id ? { ...el, quantity: el.quantity + 1 } : el
-        )
+      newItemsArr = items.map(el =>
+        el.id === newItem.id ? { ...el, quantity: el.quantity + 1 } : el
       )
-      setTotal(total + tmpItem.price)
     }
-    Cookies.set('cart', items)
+
+    // Update
+    setItems(newItemsArr)
+    setTotal(total + item.price)
+    Cookies.set('cart', newItemsArr)
   }
 
   function removeItem(item) {
     const newItem = items.find(i => i.id === item.id)
+
+    let newItemsArr = []
     if (newItem.quantity > 1) {
-      setItems(
-        items.map(el =>
-          el.id === newItem.id ? { ...el, quantity: el.quantity - 1 } : el
-        )
+      newItemsArr = items.map(el =>
+        el.id === newItem.id ? { ...el, quantity: el.quantity - 1 } : el
       )
-      setTotal(total - item.price)
     } else {
       const index = items.findIndex(i => i.id === newItem.id)
       items.splice(index, 1)
-      setItems(items)
-      setTotal(total - item.price)
+      newItemsArr = items
     }
-    Cookies.set('cart', items)
+
+    // Update
+    setItems(newItemsArr)
+    setTotal(total - item.price)
+    Cookies.set('cart', newItemsArr)
   }
 
   return (

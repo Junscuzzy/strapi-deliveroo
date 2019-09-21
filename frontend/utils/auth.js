@@ -1,10 +1,7 @@
 import Cookies from 'js-cookie'
-import Strapi from 'strapi-sdk-javascript'
 import Router from 'next/router'
 
-import { apiUrl } from './api'
-
-const strapi = new Strapi(apiUrl)
+import { strapi } from './api'
 
 export const setToken = token => {
   if (!process.browser) {

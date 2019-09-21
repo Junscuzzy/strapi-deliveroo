@@ -45,7 +45,9 @@ Dish.propTypes = {
   }),
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
-  addItem: PropTypes.func.isRequired
+  context: PropTypes.shape({
+    addItem: PropTypes.func.isRequired
+  }).isRequired
 }
 
 Dish.defaultProps = {

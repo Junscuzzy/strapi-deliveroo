@@ -31,7 +31,7 @@ function Layout({ children, title, isAuthenticated, loggedUser }) {
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossOrigin="anonymous"
         />
-        {/* <script src="https://js.stripe.com/v3" /> */}
+        <script src="https://js.stripe.com/v3" />
       </Head>
       <Header isAuth={isAuthenticated} username={loggedUser} />
       <Container>{children}</Container>
