@@ -15,7 +15,7 @@ import slugify from 'slugify'
 export default function Restaurant({ image, name, description }) {
   // console.log({ name, slug: slugify(name) })
   return (
-    <Col className="col-4">
+    <Col className="col-12 col-sm-6 col-md-4">
       <Card>
         <CardImg top width="100%" src={`http://localhost:1337${image.url}`} />
         <CardBody>

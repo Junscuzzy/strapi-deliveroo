@@ -12,7 +12,7 @@ import PropTypes from 'prop-types'
 
 export default function Dish({ image, name, price }) {
   return (
-    <Col className="col-4">
+    <Col className="col-lg-4 col-md-6 col-12">
       <Card>
         <CardImg top width="100%" src={`http://localhost:1337${image.url}`} />
         <CardBody>

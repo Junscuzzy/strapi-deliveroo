@@ -25,14 +25,14 @@ function RestaurantTemplate() {
       <h1>{name}</h1>
       <br />
       <Row>
-        <Col className="col-8">
+        <Col className="col-8-sm">
           <Row>
             {dishes.map(props => (
               <Dish key={props.name} {...props} />
             ))}
           </Row>
         </Col>
-        <Col className="col-4">
+        <Col className="col-4 d-none d-sm-block">
           <Cart />
         </Col>
       </Row>
