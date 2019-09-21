@@ -2,6 +2,7 @@ import React from 'react'
 import App from 'next/app'
 
 import Layout from '../components/layout'
+import AppProvider from '../components/context/appProvider'
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -16,9 +17,11 @@ class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props
     return (
-      <Layout {...pageProps}>
-        <Component {...pageProps} />
-      </Layout>
+      <AppProvider>
+        <Layout {...pageProps}>
+          <Component {...pageProps} />
+        </Layout>
+      </AppProvider>
     )
   }
 }

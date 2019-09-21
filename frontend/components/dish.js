@@ -9,8 +9,12 @@ import {
   Col
 } from 'reactstrap'
 import PropTypes from 'prop-types'
+import { compose } from 'recompose'
+import { withContext } from './context/appProvider'
+import defaultPage from '../hocs/defaultPage'
 
-export default function Dish({ image, name, price }) {
+function Dish({ context, ...rest }) {
+  const { image, name, price } = rest
   return (
     <Col className="col-lg-4 col-md-6 col-12">
       <Card>
@@ -21,7 +25,12 @@ export default function Dish({ image, name, price }) {
             <CardText>{`${price}€`}</CardText>
           </div>
           <br />
-          <Button outline color="primary" className="btn btn-primary">
+          <Button
+            outline
+            color="primary"
+            className="btn btn-primary"
+            onClick={() => context.addItem(rest)}
+          >
             + Add to cart
           </Button>
         </CardBody>
@@ -35,9 +44,15 @@ Dish.propTypes = {
     url: PropTypes.string
   }),
   name: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired
+  price: PropTypes.number.isRequired,
+  addItem: PropTypes.func.isRequired
 }
 
 Dish.defaultProps = {
   image: { url: '' }
 }
+
+export default compose(
+  withContext,
+  defaultPage
+)(Dish)

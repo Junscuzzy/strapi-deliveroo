@@ -1,7 +1,9 @@
 import React from 'react'
 import { Row, Container, Col } from 'reactstrap'
-import { useRouter } from 'next/router'
+import { useRouter, withRouter } from 'next/router'
 import slugify from 'slugify'
+import { compose } from 'recompose'
+import PropTypes from 'prop-types'
 
 import useFetch from '../../hooks/useFetch'
 import { restaurantsURL } from '../../utils/api'
@@ -9,7 +11,7 @@ import Dish from '../../components/dish'
 import Cart from '../../components/cart'
 import defaultPage from '../../hocs/defaultPage'
 
-function RestaurantTemplate() {
+function RestaurantTemplate({ isAuthenticated }) {
   const router = useRouter()
   const { slug } = router.query
   const [data, loading] = useFetch(restaurantsURL)
@@ -33,11 +35,22 @@ function RestaurantTemplate() {
           </Row>
         </Col>
         <Col className="col-4 d-none d-sm-block">
-          <Cart />
+          <Cart isAuthenticated={isAuthenticated} />
         </Col>
       </Row>
     </Container>
   )
 }
 
-export default defaultPage(RestaurantTemplate)
+RestaurantTemplate.propTypes = {
+  isAuthenticated: PropTypes.bool
+}
+
+RestaurantTemplate.defaultProps = {
+  isAuthenticated: false
+}
+
+export default compose(
+  defaultPage,
+  withRouter
+)(RestaurantTemplate)
