@@ -1,29 +1,29 @@
-import React, { useState } from 'react'
-import { Button, Form, FormGroup, Label } from 'reactstrap'
+import React from 'react'
+import { Button, Form as BaseForm, FormGroup, Label } from 'reactstrap'
 import PropTypes from 'prop-types'
 
-import useForm from '../hooks/useForm'
-// import { useAuth } from '../hooks/useAuth'
-import { Header, Input, FormWrapper, Paper } from '../utils/formStyle'
+import useForm from '../../hooks/useForm'
+import { strapiRegister, strapiLogin } from '../../utils/auth'
+import { Header, Input, FormWrapper, Paper } from './style'
 
-export default function AuthForm({ title, fields, typeform, submitLabel }) {
-  // Create initialValues object from fields
+export default function Form({ title, fields, typeform, submitLabel }) {
+  // Create initialValues object from fields.name
   const initialValues = fields.reduce((acc, { name }) => {
     acc[name] = ''
     return acc
   }, {})
 
   // hooks
-  // const auth = useAuth()
-  const [error, setError] = useState('')
-  const { inputs, handleSubmit } = useForm(initialValues, () => {
-    if (typeform === 'SIGNUP') {
-      // auth.signup(inputs)
-    } else if (typeform === 'SIGNIN') {
-      // auth.signin(inputs)
+  const { inputs, handleSubmit, handleInputChange } = useForm(
+    initialValues,
+    () => {
+      if (typeform === 'register') {
+        strapiRegister(inputs.username, inputs.email, inputs.password)
+      } else if (typeform === 'login') {
+        strapiLogin(inputs.email, inputs.password)
+      }
     }
-    console.log(inputs)
-  })
+  )
 
   return (
     <Paper>
@@ -31,8 +31,7 @@ export default function AuthForm({ title, fields, typeform, submitLabel }) {
         <h1>{title}</h1>
       </Header>
       <FormWrapper>
-        {error && <div className="notification">{error}</div>}
-        <Form onSubmit={handleSubmit}>
+        <BaseForm onSubmit={handleSubmit}>
           {fields.map(({ name, type }) => (
             <FormGroup key={name}>
               <Label style={{ textTransform: 'capitalize' }}>
@@ -43,12 +42,13 @@ export default function AuthForm({ title, fields, typeform, submitLabel }) {
                 name={name}
                 value={inputs[name]}
                 minLength={type === 'password' ? 8 : null}
+                onChange={handleInputChange}
                 required
               />
             </FormGroup>
           ))}
           <FormGroup>
-            {typeform === 'SIGNIN' && (
+            {typeform === 'login' && false && (
               <a href="">
                 <small>Forgot Password?</small>
               </a>
@@ -61,13 +61,13 @@ export default function AuthForm({ title, fields, typeform, submitLabel }) {
               {submitLabel}
             </Button>
           </FormGroup>
-        </Form>
+        </BaseForm>
       </FormWrapper>
     </Paper>
   )
 }
 
-AuthForm.propTypes = {
+Form.propTypes = {
   title: PropTypes.string.isRequired,
   fields: PropTypes.arrayOf(
     PropTypes.shape({
@@ -75,10 +75,10 @@ AuthForm.propTypes = {
       type: PropTypes.string.isRequired
     })
   ).isRequired,
-  typeform: PropTypes.oneOf(['SIGNIN', 'SIGNUP']).isRequired,
+  typeform: PropTypes.oneOf(['register', 'login']).isRequired,
   submitLabel: PropTypes.string
 }
 
-AuthForm.defaultProps = {
+Form.defaultProps = {
   submitLabel: 'Submit'
 }

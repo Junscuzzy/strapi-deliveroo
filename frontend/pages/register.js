@@ -1,7 +1,8 @@
 import React from 'react'
 import { Container } from 'reactstrap'
 
-import AuthForm from '../components/authForm'
+import Form from '../components/form'
+import defaultPage from '../hocs/defaultPage'
 
 const fields = [
   { name: 'username', type: 'text' },
@@ -9,10 +10,12 @@ const fields = [
   { name: 'password', type: 'password' }
 ]
 
-export default function SignUp() {
+function Register() {
   return (
     <Container>
-      <AuthForm fields={fields} title="Sign up" typeform="SIGNUP" />
+      <Form fields={fields} title="Register" typeform="register" />
     </Container>
   )
 }
+
+export default defaultPage(Register)

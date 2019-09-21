@@ -13,7 +13,7 @@ import Link from 'next/link'
 import slugify from 'slugify'
 
 export default function Restaurant({ image, name, description }) {
-  console.log({ name, slug: slugify(name) })
+  // console.log({ name, slug: slugify(name) })
   return (
     <Col className="col-4">
       <Card>

@@ -3,8 +3,9 @@ import { Col, Row } from 'reactstrap'
 
 import RestaurantList from '../components/restaurantList'
 import Search from '../components/search'
+import defaultPage from '../hocs/defaultPage'
 
-export default function Index() {
+function Index() {
   const [query, setQuery] = useState('')
   return (
     <Row>
@@ -15,3 +16,5 @@ export default function Index() {
     </Row>
   )
 }
+
+export default defaultPage(Index)

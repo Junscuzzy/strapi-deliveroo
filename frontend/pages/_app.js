@@ -3,7 +3,7 @@ import App from 'next/app'
 
 import Layout from '../components/layout'
 
-export default class MyApp extends App {
+class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {}
 
@@ -22,3 +22,5 @@ export default class MyApp extends App {
     )
   }
 }
+
+export default MyApp

@@ -7,8 +7,9 @@ import useFetch from '../../hooks/useFetch'
 import { restaurantsURL } from '../../utils/api'
 import Dish from '../../components/dish'
 import Cart from '../../components/cart'
+import defaultPage from '../../hocs/defaultPage'
 
-export default function RestaurantTemplate() {
+function RestaurantTemplate() {
   const router = useRouter()
   const { slug } = router.query
   const [data, loading] = useFetch(restaurantsURL)
@@ -38,3 +39,5 @@ export default function RestaurantTemplate() {
     </Container>
   )
 }
+
+export default defaultPage(RestaurantTemplate)

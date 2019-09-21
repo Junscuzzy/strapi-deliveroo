@@ -8,16 +8,16 @@ import PropTypes from 'prop-types'
 import Header from './header'
 
 const globalStyle = css`
-  a:link {
+  a {
     text-decoration: none;
   }
-  a.navbar-brand,
-  a.nav-link {
-    color: white;
+  .navbar-brand,
+  .nav-link {
+    color: white !important;
   }
 `
 
-function Layout({ children, title }) {
+function Layout({ children, title, isAuthenticated, loggedUser }) {
   return (
     <>
       <Global styles={globalStyle} />
@@ -31,9 +31,9 @@ function Layout({ children, title }) {
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossOrigin="anonymous"
         />
-        <script src="https://js.stripe.com/v3" />
+        {/* <script src="https://js.stripe.com/v3" /> */}
       </Head>
-      <Header />
+      <Header isAuth={isAuthenticated} username={loggedUser} />
       <Container>{children}</Container>
     </>
   )
@@ -44,11 +44,15 @@ Layout.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]).isRequired,
-  title: PropTypes.string
+  title: PropTypes.string,
+  isAuthenticated: PropTypes.bool,
+  loggedUser: PropTypes.string
 }
 
 Layout.defaultProps = {
-  title: 'Welcome to Nextjs'
+  title: 'Welcome to Nextjs',
+  loggedUser: '',
+  isAuthenticated: false
 }
 
 export default Layout
