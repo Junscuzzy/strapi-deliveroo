@@ -17,7 +17,6 @@ function AppProvider({ children }) {
     if (cart) {
       setItems(cart)
       cart.forEach(({ price, quantity }) => setTotal(price * quantity))
-
     }
   }, [])
 
