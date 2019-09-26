@@ -1,4 +1,4 @@
-import { actionTypes } from '../actionsTypes'
+import { counterTypes } from '../actionsTypes'
 
 const exampleInitialState = {
   lastUpdate: 0,
@@ -8,13 +8,13 @@ const exampleInitialState = {
 
 const counterReducer = (state = exampleInitialState, action) => {
   switch (action.type) {
-    case actionTypes.TICK:
+    case counterTypes.TICK:
       return { ...state, lastUpdate: action.ts, light: !!action.light }
-    case actionTypes.INCREMENT:
+    case counterTypes.INCREMENT:
       return { ...state, count: state.count + 1 }
-    case actionTypes.DECREMENT:
+    case counterTypes.DECREMENT:
       return { ...state, count: state.count - 1 }
-    case actionTypes.RESET:
+    case counterTypes.RESET:
       return { ...state, count: exampleInitialState.count }
     default:
       return state

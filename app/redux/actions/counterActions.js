@@ -1,23 +1,23 @@
-import { actionTypes } from '../actionsTypes'
+import { counterTypes } from '../actionsTypes'
 
 export const serverRenderClock = isServer => dispatch => {
-  return dispatch({ type: actionTypes.TICK, light: !isServer, ts: Date.now() })
+  return dispatch({ type: counterTypes.TICK, light: !isServer, ts: Date.now() })
 }
 
 export const startClock = dispatch => {
   return setInterval(() => {
-    dispatch({ type: actionTypes.TICK, light: true, ts: Date.now() })
+    dispatch({ type: counterTypes.TICK, light: true, ts: Date.now() })
   }, 1000)
 }
 
 export const incrementCount = () => {
-  return { type: actionTypes.INCREMENT }
+  return { type: counterTypes.INCREMENT }
 }
 
 export const decrementCount = () => {
-  return { type: actionTypes.DECREMENT }
+  return { type: counterTypes.DECREMENT }
 }
 
 export const resetCount = () => {
-  return { type: actionTypes.RESET }
+  return { type: counterTypes.RESET }
 }
