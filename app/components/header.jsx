@@ -1,39 +1,56 @@
 import React from 'react'
 import Link from 'next/link'
 import { useSelector } from 'react-redux'
+import PropTypes from 'prop-types'
+import AppBar from '@material-ui/core/AppBar'
+import Typography from '@material-ui/core/Typography'
+import Headroom from 'react-headroom'
+import Box from '@material-ui/core/Box'
+import Button from '@material-ui/core/Button'
+import Toolbar from '@material-ui/core/Toolbar'
+import BaseLink from '@material-ui/core/Link'
 
-export default function Header() {
-  const isAuth = useSelector(state => state.auth)
+export default function Header({ sitename }) {
+  const { isAuth } = useSelector(state => state.auth)
   return (
-    <nav>
-      <ul>
-        <li>
+    <Headroom>
+      <AppBar position="static" color="primary">
+        <Box
+          component={Toolbar}
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between'
+          }}
+        >
           <Link href="/">
-            <a>Home</a>
+            <BaseLink
+              color="inherit"
+              style={{ textDecoration: 'none', cursor: 'pointer' }}
+            >
+              <Typography variant="h6" color="inherit" noWrap>
+                {sitename}
+              </Typography>
+            </BaseLink>
           </Link>
-        </li>
-        {isAuth || (
-          <>
-            <li>
+          <nav>
+            {isAuth ? (
+              <Button color="inherit">Logout</Button>
+            ) : (
               <Link href="/login">
-                <a>Login</a>
+                <Button color="inherit">Login</Button>
               </Link>
-            </li>
-            <li>
-              <Link href="/register">
-                <a>Register</a>
-              </Link>
-            </li>
-          </>
-        )}
-        {isAuth && (
-          <li>
-            <Link href="/register">
-              <a>Logout</a>
-            </Link>
-          </li>
-        )}
-      </ul>
-    </nav>
+            )}
+          </nav>
+        </Box>
+      </AppBar>
+    </Headroom>
   )
+}
+
+Header.propTypes = {
+  sitename: PropTypes.string
+}
+
+Header.defaultProps = {
+  sitename: 'Deliveroo Clone'
 }

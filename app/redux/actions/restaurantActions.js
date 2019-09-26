@@ -1,4 +1,4 @@
-import { strapi } from '../../config'
+import { strapi } from '../../config/api'
 import { restaurantTypes } from '../actionsTypes'
 
 export const getPosts = () => dispatch => {
