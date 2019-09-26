@@ -1,8 +1,37 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
-function Index() {
-  return <div>Hello Next.js</div>
+import { getPosts, filterPosts } from '../redux/actions/restaurantActions'
+import Search from '../components/search'
+import RestaurantsList from '../components/restaurantsList'
+
+function Index(props) {
+  const { posts } = props
+  const restaurants = posts.filter(p => p.visible)
+  return (
+    <>
+      <Search setQuery={val => props.filterPosts(val)} />
+      <RestaurantsList posts={restaurants} />
+    </>
+  )
 }
 
-export default connect()(Index)
+Index.getInitialProps = async ({ reduxStore }) => {
+  await reduxStore.dispatch(getPosts())
+  return {}
+}
+
+Index.propTypes = {
+  posts: PropTypes.arrayOf(PropTypes.object),
+  filterPosts: PropTypes.func.isRequired
+}
+
+Index.defaultProps = {
+  posts: []
+}
+
+export default connect(
+  state => state.restaurant,
+  { filterPosts }
+)(Index)

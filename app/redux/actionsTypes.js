@@ -15,8 +15,7 @@ export const restaurantTypes = {
 // Cart
 export const cartTypes = {
   ADD_ITEM: 'ADD_ITEM',
-  REMOVE_ITEM: 'REMOVE_ITEM',
-  GET_TOTAL: 'GET_TOTAL'
+  REMOVE_ITEM: 'REMOVE_ITEM'
 }
 
 // Auth
