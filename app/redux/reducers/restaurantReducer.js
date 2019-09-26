@@ -6,7 +6,6 @@ const initialState = {
 }
 
 const restaurantReducer = (state = initialState, action) => {
-  console.log(action)
   switch (action.type) {
     case restaurantTypes.GET_POSTS:
       return {
