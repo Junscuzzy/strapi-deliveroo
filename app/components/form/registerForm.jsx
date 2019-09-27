@@ -12,7 +12,7 @@ const isMail = email =>
 
 const validate = values => {
   const errors = {}
-  const requiredFields = ['email', 'password']
+  const requiredFields = ['username', 'email', 'password']
   requiredFields.forEach(field => {
     if (!values[field]) {
       errors[field] = 'Required'
@@ -24,7 +24,7 @@ const validate = values => {
   return errors
 }
 
-function LoginForm(props) {
+function RegisterForm(props) {
   const theme = useTheme()
   const { handleSubmit } = props
   return (
@@ -35,6 +35,7 @@ function LoginForm(props) {
         marginTop: theme.spacing(1)
       }}
     >
+      <Field name="username" component={renderTextField} label="Username" />
       <Field name="email" component={renderTextField} label="Email" />
       <Field
         name="password"
@@ -52,11 +53,11 @@ function LoginForm(props) {
   )
 }
 
-LoginForm.propTypes = {
+RegisterForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired
 }
 
 export default reduxForm({
-  form: 'login',
+  form: 'register',
   validate
-})(LoginForm)
+})(RegisterForm)

@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import { getPosts, filterPosts } from '../redux/actions/restaurantActions'
-import Search from '../components/search'
-import RestaurantsList from '../components/restaurantsList'
+import Search from '../components/restaurant/search'
+import RestaurantsList from '../components/restaurant/restaurantsList'
 import Hero from '../components/hero'
+import { checkServerSideCookie } from '../redux/actions/authActions'
 
 function Index(props) {
   const { posts } = props
@@ -22,8 +23,9 @@ function Index(props) {
   )
 }
 
-Index.getInitialProps = async ({ reduxStore }) => {
-  await reduxStore.dispatch(getPosts())
+Index.getInitialProps = async ctx => {
+  await ctx.reduxStore.dispatch(getPosts())
+  checkServerSideCookie(ctx) // Check auth
   return {}
 }
 

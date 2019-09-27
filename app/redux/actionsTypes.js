@@ -1,11 +1,3 @@
-// Counter
-export const counterTypes = {
-  TICK: 'TICK',
-  INCREMENT: 'INCREMENT',
-  DECREMENT: 'DECREMENT',
-  RESET: 'RESET'
-}
-
 // Restaurants
 export const restaurantTypes = {
   GET_POSTS: 'GET_POSTS',
@@ -20,7 +12,6 @@ export const cartTypes = {
 
 // Auth
 export const authTypes = {
-  REGISTER: 'REGISTER',
   LOGIN: 'LOGIN',
   LOGOUT: 'LOGOUT'
 }

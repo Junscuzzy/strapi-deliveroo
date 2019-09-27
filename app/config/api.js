@@ -12,3 +12,4 @@ export const stripeApiKey =
 // Routes
 export const restaurantsURL = `${apiUrl}/restaurants`
 export const dishesURL = `${apiUrl}/dishes`
+export const authURL = `${apiUrl}/auth`

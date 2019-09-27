@@ -1,21 +1,17 @@
 import { authTypes } from '../actionsTypes'
-// import { strapi } from '../../config'
+
+const { LOGIN, LOGOUT } = authTypes
 
 const initialState = {
-  isAuth: false,
-  token: '',
-  username: ''
+  token: ''
 }
 
 const authReducer = (state = initialState, action) => {
-  console.log({ action })
   switch (action.type) {
-    case authTypes.REGISTER:
-      return state
-    case authTypes.LOGIN:
-      return state
-    case authTypes.LOGOUT:
-      return initialState
+    case LOGIN:
+      return { ...state, token: action.token }
+    case LOGOUT:
+      return { ...state, token: '' }
     default:
       return state
   }
