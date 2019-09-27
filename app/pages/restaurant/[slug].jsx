@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import slugify from 'slugify'
 import PropTypes from 'prop-types'
+
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 
@@ -9,7 +10,8 @@ import Dish from '../../components/restaurant/dish'
 import { getPosts } from '../../redux/actions/restaurantActions'
 import Cart from '../../components/cart/cart'
 import Hero from '../../components/hero'
-import { checkServerSideCookie } from '../../redux/actions/authActions'
+import { checkServerSideAuthCookie } from '../../redux/actions/authActions'
+import { checkServerSideCartCookie } from '../../redux/actions/cartActions'
 
 function RestaurantTemplate({ posts, slug }) {
   // eslint-disable-next-line react/prop-types
@@ -43,7 +45,8 @@ function RestaurantTemplate({ posts, slug }) {
 RestaurantTemplate.getInitialProps = async ctx => {
   const { reduxStore, query } = ctx
   await reduxStore.dispatch(getPosts())
-  checkServerSideCookie(ctx) // Check auth
+  checkServerSideAuthCookie(ctx) // Check auth
+  checkServerSideCartCookie(ctx) // Check cart
   return { slug: query.slug }
 }
 

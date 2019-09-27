@@ -42,13 +42,15 @@ export const loginFromCookie = token => {
 
 // check if the page is being loaded on the server,
 // and if so, get auth token from the cookie
-export const checkServerSideCookie = ctx => {
+export const checkServerSideAuthCookie = ctx => {
   if (!process.browser || ctx.isServer) {
+    // Server
     if (ctx.req.headers.cookie) {
       const token = getCookie('token', ctx.req)
       ctx.reduxStore.dispatch(loginFromCookie(token))
     }
   } else {
+    // Browser
     const { token } = ctx.reduxStore.getState().auth
     if (token && (ctx.pathname === '/login' || ctx.pathname === '/register')) {
       setTimeout(() => Router.push('/'), 0)

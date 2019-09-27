@@ -1,5 +1,7 @@
 import { restaurantTypes } from '../actionsTypes'
 
+const { GET_POSTS, FILTER_POSTS, LOADING_POSTS } = restaurantTypes
+
 const initialState = {
   posts: [],
   loading: true
@@ -7,20 +9,12 @@ const initialState = {
 
 const restaurantReducer = (state = initialState, action) => {
   switch (action.type) {
-    case restaurantTypes.GET_POSTS:
-      return {
-        ...state,
-        posts: action.posts.map(post => ({ ...post, visible: true })),
-        loading: false
-      }
-    case restaurantTypes.FILTER_POSTS:
-      return {
-        ...state,
-        posts: state.posts.map(post => ({
-          ...post,
-          visible: post.name.toLowerCase().includes(action.search)
-        }))
-      }
+    case LOADING_POSTS:
+      return { ...state, loading: true }
+    case GET_POSTS:
+      return { ...state, posts: action.posts, loading: false }
+    case FILTER_POSTS:
+      return { ...state, posts: action.posts, loading: false }
     default:
       return state
   }

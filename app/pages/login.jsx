@@ -6,7 +6,7 @@ import NextLink from 'next/link'
 import PropTypes from 'prop-types'
 
 import LoginForm from '../components/form/loginForm'
-import { checkServerSideCookie, login } from '../redux/actions/authActions'
+import { checkServerSideAuthCookie, login } from '../redux/actions/authActions'
 import AuthFormLayout from '../components/form/authFormLayout'
 
 function Login(props) {
@@ -31,7 +31,7 @@ Login.propTypes = {
 Login.defaultProps = {}
 
 Login.getInitialProps = async ctx => {
-  checkServerSideCookie(ctx)
+  checkServerSideAuthCookie(ctx)
   return {}
 }
 

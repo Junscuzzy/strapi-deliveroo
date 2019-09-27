@@ -6,7 +6,10 @@ import NextLink from 'next/link'
 import PropTypes from 'prop-types'
 
 import RegisterForm from '../components/form/registerForm'
-import { register, checkServerSideCookie } from '../redux/actions/authActions'
+import {
+  register,
+  checkServerSideAuthCookie
+} from '../redux/actions/authActions'
 import AuthFormLayout from '../components/form/authFormLayout'
 
 function Register(props) {
@@ -31,7 +34,7 @@ Register.propTypes = {
 Register.defaultProps = {}
 
 Register.getInitialProps = async ctx => {
-  checkServerSideCookie(ctx)
+  checkServerSideAuthCookie(ctx)
   return {}
 }
 

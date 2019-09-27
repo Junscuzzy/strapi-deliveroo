@@ -25,17 +25,13 @@ const getCookieFromBrowser = key => {
   return cookie.get(key)
 }
 
+// Use cookie-parser in ./server.js
 const getCookieFromServer = (key, req) => {
-  if (!req.headers.cookie) {
+  const { cookies } = req
+  if (!cookies) {
     return undefined
   }
-  const rawCookie = req.headers.cookie
-    .split(';')
-    .find(c => c.trim().startsWith(`${key}=`))
-  if (!rawCookie) {
-    return undefined
-  }
-  return rawCookie.split('=')[1]
+  return cookies[key]
 }
 
 export const getCookie = (key, req) => {
