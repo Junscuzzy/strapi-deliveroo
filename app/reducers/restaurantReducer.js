@@ -1,4 +1,4 @@
-import { restaurantTypes } from '../actionsTypes'
+import { restaurantTypes } from '../actions/types'
 
 const { GET_POSTS, FILTER_POSTS, LOADING_POSTS } = restaurantTypes
 

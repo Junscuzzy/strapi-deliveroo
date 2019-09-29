@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import Container from '@material-ui/core/Container'
 import TextField from '@material-ui/core/TextField'
 
-import { filterPosts } from '../../redux/actions/restaurantActions'
+import { filterPosts } from '../../actions/restaurantActions'
 
 export default function Search() {
   const dispatch = useDispatch()

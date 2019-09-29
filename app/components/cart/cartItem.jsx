@@ -12,7 +12,7 @@ import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import Fade from '@material-ui/core/Fade'
 
-import { addItem, removeItem } from '../../redux/actions/cartActions'
+import { addItem, removeItem } from '../../actions/cartActions'
 import { apiUrl } from '../../config/api'
 
 export default function CardItem(props) {

@@ -9,7 +9,7 @@ import RegisterForm from '../components/form/registerForm'
 import {
   register,
   checkServerSideAuthCookie
-} from '../redux/actions/authActions'
+} from '../actions/authActions'
 import AuthFormLayout from '../components/form/authFormLayout'
 
 function Register(props) {

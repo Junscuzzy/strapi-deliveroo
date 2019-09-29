@@ -1,4 +1,4 @@
-import { authTypes } from '../actionsTypes'
+import { authTypes } from '../actions/types'
 
 const { LOGIN, LOGOUT } = authTypes
 

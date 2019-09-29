@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button'
 import Toolbar from '@material-ui/core/Toolbar'
 import BaseLink from '@material-ui/core/Link'
 
-import { logout } from '../redux/actions/authActions'
+import { logout } from '../actions/authActions'
 
 export default function Header({ sitename }) {
   const { token } = useSelector(state => state.auth)

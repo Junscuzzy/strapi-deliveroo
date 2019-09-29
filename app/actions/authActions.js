@@ -1,8 +1,8 @@
 import Router from 'next/router'
 
-import { authTypes } from '../actionsTypes'
-import { strapi } from '../../config/api'
-import { setCookie, removeCookie, getCookie } from '../../lib/cookie'
+import { authTypes } from './types'
+import { strapi } from '../config/api'
+import { setCookie, removeCookie, getCookie } from '../lib/cookie'
 
 const { LOGIN, LOGOUT } = authTypes
 

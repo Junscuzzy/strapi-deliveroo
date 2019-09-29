@@ -1,5 +1,5 @@
-import { cartTypes } from '../actionsTypes'
-import { setCookie, removeCookie, getCookie } from '../../lib/cookie'
+import { cartTypes } from './types'
+import { setCookie, removeCookie, getCookie } from '../lib/cookie'
 
 const { ADD_ITEM, REMOVE_ITEM, CLEAR_CART, LOAD_CART } = cartTypes
 

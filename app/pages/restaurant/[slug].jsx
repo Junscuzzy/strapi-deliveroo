@@ -7,11 +7,11 @@ import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 
 import Dish from '../../components/restaurant/dish'
-import { getPosts } from '../../redux/actions/restaurantActions'
+import { getPosts } from '../../actions/restaurantActions'
 import Cart from '../../components/cart/cart'
 import Hero from '../../components/hero'
-import { checkServerSideAuthCookie } from '../../redux/actions/authActions'
-import { checkServerSideCartCookie } from '../../redux/actions/cartActions'
+import { checkServerSideAuthCookie } from '../../actions/authActions'
+import { checkServerSideCartCookie } from '../../actions/cartActions'
 
 function RestaurantTemplate({ posts, slug }) {
   // eslint-disable-next-line react/prop-types

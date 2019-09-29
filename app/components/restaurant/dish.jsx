@@ -11,7 +11,7 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Fade from '@material-ui/core/Fade'
 
-import { addItem } from '../../redux/actions/cartActions'
+import { addItem } from '../../actions/cartActions'
 import { apiUrl } from '../../config/api'
 
 export default function Dish(props) {

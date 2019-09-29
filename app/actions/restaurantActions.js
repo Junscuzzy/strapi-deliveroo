@@ -1,5 +1,5 @@
-import { strapi } from '../../config/api'
-import { restaurantTypes } from '../actionsTypes'
+import { strapi } from '../config/api'
+import { restaurantTypes } from './types'
 
 const { GET_POSTS, FILTER_POSTS, LOADING_POSTS } = restaurantTypes
 

@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { getPosts } from '../redux/actions/restaurantActions'
+import { getPosts } from '../actions/restaurantActions'
 import Search from '../components/restaurant/search'
 import RestaurantsList from '../components/restaurant/restaurantsList'
 import Hero from '../components/hero'
-import { checkServerSideAuthCookie } from '../redux/actions/authActions'
-import { checkServerSideCartCookie } from '../redux/actions/cartActions'
+import { checkServerSideAuthCookie } from '../actions/authActions'
+import { checkServerSideCartCookie } from '../actions/cartActions'
 
 export default function Index() {
   return (

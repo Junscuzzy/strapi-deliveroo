@@ -1,4 +1,4 @@
-import { cartTypes } from '../actionsTypes'
+import { cartTypes } from '../actions/types'
 
 const { ADD_ITEM, REMOVE_ITEM, CLEAR_CART, LOAD_CART } = cartTypes
 

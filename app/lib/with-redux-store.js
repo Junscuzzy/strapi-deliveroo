@@ -1,5 +1,5 @@
 import React from 'react'
-import initializeStore from '../redux/store'
+import initializeStore from './store'
 
 const isServer = typeof window === 'undefined'
 // eslint-disable-next-line no-underscore-dangle
