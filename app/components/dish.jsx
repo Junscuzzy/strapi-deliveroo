@@ -1,7 +1,6 @@
 import React from 'react'
-import Link from 'next/link'
-import slugify from 'slugify'
 import PropTypes from 'prop-types'
+
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
@@ -11,9 +10,9 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Fade from '@material-ui/core/Fade'
 
-import { apiUrl } from '../../config/api'
+import { apiUrl } from '../config/api'
 
-export default function Restaurant({ name, description, image }) {
+export default function Dish({ image, name, price, addItem }) {
   return (
     <Grid item xs={12} sm={6} md={4}>
       <Fade in>
@@ -34,14 +33,17 @@ export default function Restaurant({ name, description, image }) {
             <Typography gutterBottom variant="h5" component="h2">
               {name}
             </Typography>
-            <Typography>{description}</Typography>
+            <Typography>{`${price}€`}</Typography>
           </CardContent>
           <CardActions>
-            <Link as={`/restaurant/${slugify(name)}`} href="/restaurant/[slug]">
-              <Button size="small" color="primary">
-                View
-              </Button>
-            </Link>
+            <Button
+              size="small"
+              variant="outlined"
+              color="primary"
+              onClick={addItem}
+            >
+              + Add to cart
+            </Button>
           </CardActions>
         </Card>
       </Fade>
@@ -49,15 +51,15 @@ export default function Restaurant({ name, description, image }) {
   )
 }
 
-Restaurant.propTypes = {
+Dish.propTypes = {
   image: PropTypes.shape({
     url: PropTypes.string
   }),
   name: PropTypes.string.isRequired,
-  description: PropTypes.string
+  price: PropTypes.number.isRequired,
+  addItem: PropTypes.func.isRequired
 }
 
-Restaurant.defaultProps = {
-  image: { url: '' },
-  description: ''
+Dish.defaultProps = {
+  image: { url: '' }
 }

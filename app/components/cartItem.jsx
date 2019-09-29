@@ -1,5 +1,4 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import ListItem from '@material-ui/core/ListItem'
@@ -12,12 +11,10 @@ import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import Fade from '@material-ui/core/Fade'
 
-import { addItem, removeItem } from '../../actions/cartActions'
-import { apiUrl } from '../../config/api'
+import { apiUrl } from '../config/api'
 
-export default function CardItem(props) {
+export default function CardItem({ addItem, removeItem, ...props }) {
   const { image, name, price, quantity } = props
-  const dispatch = useDispatch()
   return (
     <Fade in>
       <ListItem>
@@ -29,13 +26,10 @@ export default function CardItem(props) {
           secondary={`${price}€`}
         />
         <ListItemSecondaryAction>
-          <IconButton aria-label="add" onClick={() => dispatch(addItem(props))}>
+          <IconButton aria-label="add" onClick={addItem}>
             <AddCircleOutlineIcon />
           </IconButton>
-          <IconButton
-            aria-label="remove"
-            onClick={() => dispatch(removeItem(props))}
-          >
+          <IconButton aria-label="remove" onClick={removeItem}>
             <RemoveCircleOutlineIcon />
           </IconButton>
         </ListItemSecondaryAction>
@@ -50,5 +44,7 @@ CardItem.propTypes = {
   }).isRequired,
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
-  quantity: PropTypes.number.isRequired
+  quantity: PropTypes.number.isRequired,
+  addItem: PropTypes.func.isRequired,
+  removeItem: PropTypes.func.isRequired
 }

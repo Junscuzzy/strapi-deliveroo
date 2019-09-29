@@ -1,14 +1,11 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-import Button from '@material-ui/core/Button'
-import Box from '@material-ui/core/Box'
 import { useTheme } from '@material-ui/core'
 import PropTypes from 'prop-types'
 
 import renderTextField from './fields/text'
-
-const isMail = email =>
-  email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)
+import Submit from './fields/submit'
+import { isMail } from '../../lib/utils'
 
 const validate = values => {
   const errors = {}
@@ -43,11 +40,7 @@ function LoginForm(props) {
         type="password"
       />
 
-      <Box m={theme.spacing(3, 0, 2)}>
-        <Button type="submit" fullWidth variant="contained" color="primary">
-          Submit
-        </Button>
-      </Box>
+      <Submit />
     </form>
   )
 }

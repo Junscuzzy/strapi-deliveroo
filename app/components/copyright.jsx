@@ -1,8 +1,9 @@
 import React from 'react'
-import Typography from '@material-ui/core/Typography'
 import NextLink from 'next/link'
-import Link from '@material-ui/core/Link'
 import PropTypes from 'prop-types'
+
+import Link from '@material-ui/core/Link'
+import Typography from '@material-ui/core/Typography'
 
 export default function Copyright({ sitename, siteUrl }) {
   return (

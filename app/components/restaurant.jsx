@@ -1,6 +1,7 @@
 import React from 'react'
+import Link from 'next/link'
+import slugify from 'slugify'
 import PropTypes from 'prop-types'
-import { useDispatch } from 'react-redux'
 
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
@@ -11,12 +12,9 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Fade from '@material-ui/core/Fade'
 
-import { addItem } from '../../actions/cartActions'
-import { apiUrl } from '../../config/api'
+import { apiUrl } from '../config/api'
 
-export default function Dish(props) {
-  const { image, name, price } = props
-  const dispatch = useDispatch()
+export default function Restaurant({ name, description, image }) {
   return (
     <Grid item xs={12} sm={6} md={4}>
       <Fade in>
@@ -37,17 +35,14 @@ export default function Dish(props) {
             <Typography gutterBottom variant="h5" component="h2">
               {name}
             </Typography>
-            <Typography>{`${price}€`}</Typography>
+            <Typography>{description}</Typography>
           </CardContent>
           <CardActions>
-            <Button
-              size="small"
-              variant="outlined"
-              color="primary"
-              onClick={() => dispatch(addItem(props))}
-            >
-              + Add to cart
-            </Button>
+            <Link as={`/restaurant/${slugify(name)}`} href="/restaurant/[slug]">
+              <Button size="small" color="primary">
+                View
+              </Button>
+            </Link>
           </CardActions>
         </Card>
       </Fade>
@@ -55,14 +50,15 @@ export default function Dish(props) {
   )
 }
 
-Dish.propTypes = {
+Restaurant.propTypes = {
   image: PropTypes.shape({
     url: PropTypes.string
   }),
   name: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired
+  description: PropTypes.string
 }
 
-Dish.defaultProps = {
-  image: { url: '' }
+Restaurant.defaultProps = {
+  image: { url: '' },
+  description: ''
 }

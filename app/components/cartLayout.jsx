@@ -1,6 +1,7 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import NextLink from 'next/link'
+import PropTypes from 'prop-types'
+import useTheme from '@material-ui/core/styles/useTheme'
 
 import Card from '@material-ui/core/Card'
 import Typography from '@material-ui/core/Typography'
@@ -9,16 +10,12 @@ import ListItem from '@material-ui/core/ListItem'
 import Divider from '@material-ui/core/Divider'
 import Button from '@material-ui/core/Button'
 import Fade from '@material-ui/core/Fade'
-import useTheme from '@material-ui/core/styles/useTheme'
 import Link from '@material-ui/core/Link'
 
-import CardItem from './cartItem'
+import { childrenPropTypes } from '../lib/utils'
 
-export default function Cart() {
-  const { items, total } = useSelector(state => state.cart)
+export default function CartLayout({ children, total, isAuth }) {
   const theme = useTheme()
-  const { token } = useSelector(state => state.auth)
-  const isAuth = typeof token !== 'undefined' && !!token
   return (
     <Card>
       <List>
@@ -34,10 +31,7 @@ export default function Cart() {
           </Typography>
         </ListItem>
         <Divider />
-        {items &&
-          items.map(
-            item => item.quantity > 0 && <CardItem key={item.id} {...item} />
-          )}
+        {children}
         <Divider />
         <ListItem>
           <Typography
@@ -74,4 +68,15 @@ export default function Cart() {
       </List>
     </Card>
   )
+}
+
+CartLayout.propTypes = {
+  children: childrenPropTypes.isRequired,
+  total: PropTypes.number,
+  isAuth: PropTypes.bool
+}
+
+CartLayout.defaultProps = {
+  total: 0,
+  isAuth: false
 }

@@ -6,16 +6,17 @@ import PropTypes from 'prop-types'
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 
-import Dish from '../../components/restaurant/dish'
+import Dish from '../../components/dish'
 import { getPosts } from '../../actions/restaurantActions'
-import Cart from '../../components/cart/cart'
+import CartContainer from '../../containers/cartContainer'
 import Hero from '../../components/hero'
 import { checkServerSideAuthCookie } from '../../actions/authActions'
-import { checkServerSideCartCookie } from '../../actions/cartActions'
+import { checkServerSideCartCookie, addItem } from '../../actions/cartActions'
 
-function RestaurantTemplate({ posts, slug }) {
+function RestaurantTemplate(props) {
+  const { posts, slug } = props
   // eslint-disable-next-line react/prop-types
-  const restaurant = posts.find(props => slugify(props.name) === slug)
+  const restaurant = posts.find(item => slugify(item.name) === slug)
   if (!restaurant) {
     return <div>Error</div>
   }
@@ -27,12 +28,16 @@ function RestaurantTemplate({ posts, slug }) {
       <Container>
         <Grid container spacing={4}>
           <Grid item sm={4}>
-            <Cart />
+            <CartContainer />
           </Grid>
           <Grid item sm={8}>
             <Grid container spacing={2}>
-              {dishes.map(props => (
-                <Dish key={props.name} {...props} />
+              {dishes.map(dish => (
+                <Dish
+                  key={dish.name}
+                  addItem={() => props.addItem(dish)}
+                  {...dish}
+                />
               ))}
             </Grid>
           </Grid>
@@ -63,7 +68,11 @@ RestaurantTemplate.propTypes = {
       )
     })
   ).isRequired,
-  slug: PropTypes.string.isRequired
+  slug: PropTypes.string.isRequired,
+  addItem: PropTypes.func.isRequired
 }
 
-export default connect(state => state.restaurant)(RestaurantTemplate)
+export default connect(
+  state => state.restaurant,
+  { addItem }
+)(RestaurantTemplate)

@@ -1,21 +1,25 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
-import { getPosts } from '../actions/restaurantActions'
-import Search from '../components/restaurant/search'
-import RestaurantsList from '../components/restaurant/restaurantsList'
+import Search from '../components/search'
+import RestaurantsList from '../components/restaurantsList'
 import Hero from '../components/hero'
 import { checkServerSideAuthCookie } from '../actions/authActions'
 import { checkServerSideCartCookie } from '../actions/cartActions'
+import { filterPosts, getPosts } from '../actions/restaurantActions'
 
-export default function Index() {
+function Index(props) {
+  const { posts, loading } = props
+  const restaurants = posts.filter(p => p.visible)
   return (
     <>
       <Hero
         title="Deliveroo Clone"
         subTitle="A deliveroo Clone using React, Next.js, Redux & Material-ui as front-end and Strapi CMS (node.js) & Stripe as backend"
       />
-      <Search />
-      <RestaurantsList />
+      <Search handleChange={value => props.filterPosts(value)} />
+      <RestaurantsList posts={restaurants} loading={loading} />
     </>
   )
 }
@@ -26,3 +30,19 @@ Index.getInitialProps = async ctx => {
   checkServerSideCartCookie(ctx) // Check cart
   return {}
 }
+
+Index.propTypes = {
+  filterPosts: PropTypes.func.isRequired,
+  posts: PropTypes.arrayOf(PropTypes.object),
+  loading: PropTypes.bool
+}
+
+Index.defaultProps = {
+  posts: [],
+  loading: true
+}
+
+export default connect(
+  state => state.restaurant,
+  { filterPosts }
+)(Index)

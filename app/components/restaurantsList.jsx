@@ -1,20 +1,20 @@
 import React from 'react'
+import useTheme from '@material-ui/core/styles/useTheme'
+import PropTypes from 'prop-types'
+
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import useTheme from '@material-ui/core/styles/useTheme'
 
-import { useSelector } from 'react-redux'
 import Restaurant from './restaurant'
-import Loader from '../loader'
+import Loader from './loader'
 
-export default function RestaurantsList() {
+export default function RestaurantsList({ posts, loading }) {
   const theme = useTheme()
-  const { posts, loading } = useSelector(state => state.restaurant)
   if (loading) {
     return <Loader />
   }
-  const restaurants = posts.filter(p => p.visible)
+
   return (
     <Container
       style={{
@@ -23,7 +23,7 @@ export default function RestaurantsList() {
       }}
     >
       <Grid container spacing={4}>
-        {!restaurants || restaurants.length < 1 ? (
+        {!posts || posts.length < 1 ? (
           <Typography
             gutterBottom
             variant="h5"
@@ -37,9 +37,19 @@ export default function RestaurantsList() {
             Not Restaurant found
           </Typography>
         ) : (
-          restaurants.map(post => <Restaurant key={post.id} {...post} />)
+          posts.map(post => <Restaurant key={post.id} {...post} />)
         )}
       </Grid>
     </Container>
   )
+}
+
+RestaurantsList.propTypes = {
+  posts: PropTypes.arrayOf(PropTypes.object),
+  loading: PropTypes.bool
+}
+
+RestaurantsList.defaultProps = {
+  posts: [],
+  loading: true
 }

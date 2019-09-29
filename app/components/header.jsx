@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
-import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
+
 import AppBar from '@material-ui/core/AppBar'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
@@ -9,12 +9,7 @@ import Button from '@material-ui/core/Button'
 import Toolbar from '@material-ui/core/Toolbar'
 import BaseLink from '@material-ui/core/Link'
 
-import { logout } from '../actions/authActions'
-
-export default function Header({ sitename }) {
-  const { token } = useSelector(state => state.auth)
-  const isAuth = typeof token !== 'undefined' && !!token
-  const dispatch = useDispatch()
+export default function Header({ sitename, logout, isAuth }) {
   return (
     <AppBar position="static" color="primary">
       <Box
@@ -36,7 +31,7 @@ export default function Header({ sitename }) {
         </Link>
         <nav>
           {isAuth ? (
-            <Button onClick={() => dispatch(logout())} color="inherit">
+            <Button onClick={logout} color="inherit">
               Logout
             </Button>
           ) : (
@@ -51,9 +46,12 @@ export default function Header({ sitename }) {
 }
 
 Header.propTypes = {
-  sitename: PropTypes.string
+  sitename: PropTypes.string,
+  logout: PropTypes.func.isRequired,
+  isAuth: PropTypes.bool
 }
 
 Header.defaultProps = {
-  sitename: 'Deliveroo Clone'
+  sitename: 'Deliveroo Clone',
+  isAuth: false
 }
