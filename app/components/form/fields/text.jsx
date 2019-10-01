@@ -28,7 +28,7 @@ renderTextField.propTypes = {
     invalid: PropTypes.bool,
     error: PropTypes.any
   }),
-  custom: PropTypes.object
+  custom: PropTypes.any
 }
 
 renderTextField.defaultProps = {
@@ -38,6 +38,5 @@ renderTextField.defaultProps = {
     touched: false,
     invalid: false,
     error: null
-  },
-  custom: PropTypes.object
+  }
 }

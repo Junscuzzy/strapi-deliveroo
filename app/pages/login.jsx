@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Link from '@material-ui/core/Link'
-import Grid from '@material-ui/core/Grid'
 import NextLink from 'next/link'
 import PropTypes from 'prop-types'
+
+import Link from '@material-ui/core/Link'
+import Grid from '@material-ui/core/Grid'
 
 import LoginForm from '../components/form/loginForm'
 import { checkServerSideAuthCookie, login } from '../actions/authActions'
