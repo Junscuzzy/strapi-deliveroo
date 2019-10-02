@@ -7,7 +7,10 @@
   },
   "options": {
     "increments": true,
-    "timestamps": true,
+    "timestamps": [
+      "created_at",
+      "updated_at"
+    ],
     "comment": ""
   },
   "attributes": {
@@ -22,6 +25,9 @@
     },
     "amount": {
       "type": "decimal"
+    },
+    "Ref": {
+      "type": "string"
     }
   }
 }
