@@ -6,9 +6,9 @@ import PropTypes from 'prop-types'
 import Link from '@material-ui/core/Link'
 import Grid from '@material-ui/core/Grid'
 
-import RegisterForm from '../components/form/registerForm'
+import RegisterForm from '../components/redux-form/registerForm'
 import { register, checkServerSideAuthCookie } from '../actions/authActions'
-import AuthFormLayout from '../components/form/authFormLayout'
+import AuthFormLayout from '../components/redux-form/authFormLayout'
 
 function Register(props) {
   return (

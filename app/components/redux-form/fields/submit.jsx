@@ -15,7 +15,7 @@ export default function Submit({ label }) {
     </Box>
   )
 }
-/* eslint-disable react/forbid-prop-types */
+
 Submit.propTypes = {
   label: PropTypes.string
 }
