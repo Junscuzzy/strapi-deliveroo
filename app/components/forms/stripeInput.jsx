@@ -4,19 +4,33 @@ import { CardElement } from 'react-stripe-elements'
 import TextField from '@material-ui/core/TextField'
 
 function StripeInput(props) {
-  const { component: Component, inputRef, ...other } = props
-  const elementRef = React.useRef()
+  const {
+    className,
+    disabled,
+    id,
+    onBlur,
+    onChange,
+    onFocus,
+    value,
+    component: Component,
+    inputRef
+  } = props
+  const inputProps = {
+    className,
+    disabled,
+    id,
+    onBlur,
+    onChange,
+    onFocus,
+    ref: ref => inputRef(ref ? ref.inputElement : null),
+    onReady: el => el.focus(),
+    value
+  }
 
-  React.useImperativeHandle(inputRef, () => ({
-    focus: () => elementRef.current.focus
-  }))
-
-  return (
-    <Component onReady={element => (elementRef.current = element)} {...other} />
-  )
+  return <Component {...inputProps} />
 }
 
-export default function StripeNumberTextField(otherProps) {
+export default function StripeNumberTextField() {
   const [errorMessage, setErrorMessage] = React.useState(null)
   function handleElementChange({ complete, error }) {
     if (error) {
@@ -34,7 +48,7 @@ export default function StripeNumberTextField(otherProps) {
       fullWidth
       variant="outlined"
       label="Credit Card Number"
-      margin="small"
+      margin="normal"
       error={hasError}
       helperText={hasError ? errorMessage || 'Invalid' : ''}
       onChange={handleElementChange}
@@ -47,7 +61,6 @@ export default function StripeNumberTextField(otherProps) {
         },
         inputComponent: StripeInput
       }}
-      {...otherProps}
     />
   )
 }

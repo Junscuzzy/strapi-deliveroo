@@ -20,7 +20,7 @@ export default function TextInput(props) {
       label={label}
       type="text"
       variant="outlined"
-      margin="small"
+      margin="normal"
       fullWidth
       autoFocus
       helperText={touched[name] ? errors[name] : ''}
