@@ -1,10 +1,13 @@
 import { cartTypes } from '../actions/types'
 
-const { ADD_ITEM, REMOVE_ITEM, CLEAR_CART, LOAD_CART } = cartTypes
+const { ADD_ITEM, REMOVE_ITEM, CLEAR_CART, LOAD_CART, ORDER } = cartTypes
 
 const initialState = {
   items: [],
-  total: 0
+  total: 0,
+  cmd: {
+    status: null
+  }
 }
 
 const restaurantReducer = (state = initialState, action) => {
@@ -13,6 +16,8 @@ const restaurantReducer = (state = initialState, action) => {
       return { ...state, ...action.cart }
     case REMOVE_ITEM:
       return { ...state, ...action.cart }
+    case ORDER:
+      return { ...state, cmd: { status: action.status } }
     case CLEAR_CART:
       return initialState
     case LOAD_CART:

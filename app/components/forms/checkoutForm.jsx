@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { injectStripe } from 'react-stripe-elements'
 import { Formik, Field, Form } from 'formik'
-import axios from 'axios'
-import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import Paper from '@material-ui/core/Paper'
 import Box from '@material-ui/core/Box'
@@ -11,9 +11,9 @@ import Grid from '@material-ui/core/Grid'
 
 import TextInput from './fields/textInput'
 import Submit from './fields/submit'
-import { apiUrl } from '../../config/api'
 import StripeNumberTextField from './stripeInput'
 import Yup from '../../lib/yup'
+import { createOrder } from '../../actions/cartActions'
 
 const InjectedInput = injectStripe(StripeNumberTextField)
 
@@ -35,45 +35,10 @@ const validationSchema = Yup.object({
 })
 
 function CheckoutForm({ stripe }) {
-  const { items, total } = useSelector(state => state.cart)
-  const { token: authToken } = useSelector(state => state.auth)
-
+  const dispatch = useDispatch()
   const submit = async (values, actions) => {
     actions.setSubmitting(false)
-
-    // Get stripe token
-    const { token } = await stripe.createToken({
-      name: values.name,
-      address_line1: values.address,
-      address_city: values.city,
-      address_state: values.state
-    })
-
-    // Save it in backend
-    const response = await axios.post(
-      `${apiUrl}/orders`,
-      {
-        token: token.id,
-        ref: token.card.id,
-        address: values.address,
-        city: values.city,
-        amount: total,
-        dishes: items
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${authToken}`
-        }
-      }
-    )
-
-    if (response.statusText === 'OK') {
-      console.log('order created')
-      // setCompleted(true)
-      // dispatch() Reset card
-      // Reset form
-      // Router.push()
-    }
+    dispatch(createOrder({ stripe, values }))
   }
 
   return (
@@ -89,8 +54,9 @@ function CheckoutForm({ stripe }) {
           initialValues={initialValues}
           onSubmit={(values, actions) => submit(values, actions)}
           validationSchema={validationSchema}
-          render={({ isValid }) => (
+          render={({ isValid, isSubmitting, isValidating }) => (
             <Form>
+              {console.log({ isValid, isSubmitting, isValidating })}
               <Grid container spacing={4}>
                 <Grid item xs={12}>
                   <Field name="name" label="Full name" component={TextInput} />
@@ -108,7 +74,10 @@ function CheckoutForm({ stripe }) {
                   <InjectedInput />
                 </Grid>
                 <Grid item xs={12}>
-                  <Submit isValid={isValid} label="Order with Stripe" />
+                  <Submit
+                    isValid={isValid && !isSubmitting && !isValidating}
+                    label="Order with Stripe"
+                  />
                 </Grid>
               </Grid>
             </Form>
@@ -119,6 +88,16 @@ function CheckoutForm({ stripe }) {
   )
 }
 
-// CheckoutForm.propTypes = {}
+CheckoutForm.propTypes = {
+  stripe: PropTypes.shape({
+    createToken: PropTypes.func.isRequired
+  })
+}
+
+CheckoutForm.defaultProps = {
+  stripe: {
+    createToken: () => {}
+  }
+}
 
 export default injectStripe(CheckoutForm)

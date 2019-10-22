@@ -12,6 +12,7 @@ export const stripeApiKey =
 export const stripeUrl = `https://js.stripe.com/v3/`
 
 // Routes
+// TODO : Used ?
 export const restaurantsURL = `${apiUrl}/restaurants`
 export const dishesURL = `${apiUrl}/dishes`
 export const authURL = `${apiUrl}/auth`

@@ -1,8 +1,12 @@
 // import Router from 'next/router'
+import axios from 'axios'
+import Router from 'next/router'
+
 import { cartTypes } from './types'
 import { setCookie, removeCookie, getCookie } from '../lib/cookie'
+import { apiUrl } from '../config/api'
 
-const { ADD_ITEM, REMOVE_ITEM, CLEAR_CART, LOAD_CART } = cartTypes
+const { ADD_ITEM, REMOVE_ITEM, CLEAR_CART, LOAD_CART, ORDER } = cartTypes
 
 export const addItem = item => (dispatch, getState) => {
   const { items, total } = getState().cart
@@ -50,6 +54,46 @@ export const removeItem = item => (dispatch, getState) => {
 export const clearCart = () => dispatch => {
   removeCookie('cart')
   dispatch({ type: CLEAR_CART })
+}
+
+export const createOrder = ({ stripe, values }) => (dispatch, getState) => {
+  const {
+    cart: { items, total },
+    auth: { token: authToken }
+  } = getState()
+  stripe
+    .createToken({
+      name: values.name,
+      address_line1: values.address,
+      address_city: values.city,
+      address_state: values.state
+    })
+    .then(({ token }) =>
+      axios
+        .post(
+          `${apiUrl}/orders`,
+          {
+            token: token.id,
+            ref: token.card.id,
+            address: values.address,
+            city: values.city,
+            amount: total,
+            dishes: items
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${authToken}`
+            }
+          }
+        )
+        .then(({ statusText }) => {
+          dispatch(clearCart())
+          dispatch({ type: ORDER, status: statusText })
+          Router.push('/')
+        })
+        .catch(() => dispatch({ type: ORDER, status: 'failed' }))
+    )
+    .catch(() => dispatch({ type: ORDER, status: 'failed' }))
 }
 
 // Get cart from the cookie and save it in the store
