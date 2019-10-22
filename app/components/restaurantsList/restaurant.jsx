@@ -12,7 +12,7 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Fade from '@material-ui/core/Fade'
 
-import { apiUrl } from '../../config/api'
+import { mediaPath } from '../../lib/utils'
 
 export default function Restaurant({ name, description, image }) {
   return (
@@ -29,7 +29,7 @@ export default function Restaurant({ name, description, image }) {
             style={{
               paddingTop: '56.25%' // 16:9
             }}
-            image={`${apiUrl}${image.url}`}
+            image={mediaPath(image.url)}
           />
           <CardContent style={{ flexGrow: 1 }}>
             <Typography gutterBottom variant="h5" component="h2">

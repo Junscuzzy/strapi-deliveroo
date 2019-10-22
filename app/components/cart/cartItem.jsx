@@ -11,7 +11,7 @@ import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import Fade from '@material-ui/core/Fade'
 
-import { apiUrl } from '../../config/api'
+import { mediaPath } from '../../lib/utils'
 
 export default function CardItem({ addItem, removeItem, ...props }) {
   const { image, name, price, quantity } = props
@@ -19,7 +19,7 @@ export default function CardItem({ addItem, removeItem, ...props }) {
     <Fade in>
       <ListItem>
         <ListItemAvatar>
-          <Avatar src={apiUrl + image.url} />
+          <Avatar src={mediaPath(image.url)} />
         </ListItemAvatar>
         <ListItemText
           primary={`${name}  ${quantity > 1 ? `x ${quantity}` : ``}`}
