@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useTheme } from '@material-ui/core'
 
+import { useTheme } from '@material-ui/core'
 import Avatar from '@material-ui/core/Avatar'
 import Box from '@material-ui/core/Box'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
