@@ -59,7 +59,7 @@ export default function CartLayout(props) {
                   </Button>
                 </NextLink>
               ) : (
-                <Typography variant="text2">
+                <Typography variant="body2">
                   You must be logged-in to order.
                   <NextLink href="/login">
                     <Link variant="body2"> Sign in</Link>

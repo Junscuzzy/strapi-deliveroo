@@ -10,7 +10,7 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import Fade from '@material-ui/core/Fade'
 
-import { apiUrl } from '../config/api'
+import { apiUrl } from '../../config/api'
 
 export default function Dish({ image, name, price, addItem }) {
   return (
