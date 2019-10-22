@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { logout } from '../actions/authActions'
-import Header from '../components/header'
+import Header from '../components/layout/header'
 
 export default function HeaderContainer() {
   const { token } = useSelector(state => state.auth)

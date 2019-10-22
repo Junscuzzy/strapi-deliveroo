@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button'
 import Fade from '@material-ui/core/Fade'
 import Link from '@material-ui/core/Link'
 
-import { childrenPropTypes } from '../lib/utils'
+import { childrenPropTypes } from '../../lib/utils'
 
 export default function CartLayout(props) {
   const { children, total, isAuth } = props

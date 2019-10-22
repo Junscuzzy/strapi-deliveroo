@@ -5,7 +5,7 @@ import { ThemeProvider } from '@material-ui/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 
 import withReduxStore from '../lib/with-redux-store'
-import Layout from '../components/layout'
+import Layout from '../components/layout/layout'
 import theme from '../config/theme'
 
 class MyApp extends App {

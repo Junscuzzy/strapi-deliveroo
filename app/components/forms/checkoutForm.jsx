@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { injectStripe } from 'react-stripe-elements'
 import { Formik, Field, Form } from 'formik'
-import * as Yup from 'yup'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
 
@@ -10,11 +9,11 @@ import Box from '@material-ui/core/Box'
 import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 
-import TextInput from './forms/fields/textInput'
-import Submit from './forms/fields/submit'
-import { apiUrl } from '../config/api'
-import StripeNumberTextField from './forms/stripeInput'
-import { getCookie } from '../lib/cookie'
+import TextInput from './fields/textInput'
+import Submit from './fields/submit'
+import { apiUrl } from '../../config/api'
+import StripeNumberTextField from './stripeInput'
+import Yup from '../../lib/yup'
 
 const InjectedInput = injectStripe(StripeNumberTextField)
 
@@ -24,16 +23,6 @@ const initialValues = {
   city: '',
   state: ''
 }
-
-Yup.setLocale({
-  string: {
-    min: `Minimum $\{min} letters`,
-    max: `Maximum $\{max} letters`
-  },
-  mixed: {
-    required: 'This fielddd is required'
-  }
-})
 
 const validationSchema = Yup.object({
   name: Yup.string().required(),
@@ -48,10 +37,6 @@ const validationSchema = Yup.object({
 function CheckoutForm({ stripe }) {
   const { items, total } = useSelector(state => state.cart)
   const { token: authToken } = useSelector(state => state.auth)
-  const [completed, setCompleted] = useState(false)
-  // const dispatch = useDispatch()
-
-
 
   const submit = async (values, actions) => {
     actions.setSubmitting(false)
@@ -82,8 +67,6 @@ function CheckoutForm({ stripe }) {
       }
     )
 
-    console.log(response)
-
     if (response.statusText === 'OK') {
       console.log('order created')
       // setCompleted(true)
@@ -106,9 +89,8 @@ function CheckoutForm({ stripe }) {
           initialValues={initialValues}
           onSubmit={(values, actions) => submit(values, actions)}
           validationSchema={validationSchema}
-          render={({ isValid, isSubmitting }) => (
+          render={({ isValid }) => (
             <Form>
-              {/* {console.log({ isSubmitting, completed, isValid })} */}
               <Grid container spacing={4}>
                 <Grid item xs={12}>
                   <Field name="name" label="Full name" component={TextInput} />

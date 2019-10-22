@@ -1,8 +1,8 @@
 import React from 'react'
 import Head from 'next/head'
 
-import HeaderContainer from '../containers/headerContainer'
-import { childrenPropTypes } from '../lib/utils'
+import HeaderContainer from '../../containers/headerContainer'
+import { childrenPropTypes } from '../../lib/utils'
 
 function Layout({ children }) {
   return (

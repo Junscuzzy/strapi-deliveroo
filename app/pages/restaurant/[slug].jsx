@@ -9,7 +9,7 @@ import Grid from '@material-ui/core/Grid'
 import Dish from '../../components/dish'
 import { getPosts } from '../../actions/restaurantActions'
 import CartContainer from '../../containers/cartContainer'
-import Hero from '../../components/hero'
+import Hero from '../../components/layout/hero'
 import { checkServerSideAuthCookie } from '../../actions/authActions'
 import { checkServerSideCartCookie, addItem } from '../../actions/cartActions'
 

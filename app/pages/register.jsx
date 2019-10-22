@@ -1,19 +1,17 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import NextLink from 'next/link'
-import PropTypes from 'prop-types'
 
 import Link from '@material-ui/core/Link'
 import Grid from '@material-ui/core/Grid'
 
-import RegisterForm from '../components/redux-form/registerForm'
-import { register, checkServerSideAuthCookie } from '../actions/authActions'
-import AuthFormLayout from '../components/redux-form/authFormLayout'
+import RegisterForm from '../components/forms/registerForm'
+import { checkServerSideAuthCookie } from '../actions/authActions'
+import AuthFormLayout from '../components/forms/authFormLayout'
 
-function Register(props) {
+function Register() {
   return (
     <AuthFormLayout title="Register">
-      <RegisterForm onSubmit={values => props.register(values)} />
+      <RegisterForm />
       <Grid container>
         <Grid item>
           <NextLink href="/login">
@@ -25,18 +23,9 @@ function Register(props) {
   )
 }
 
-Register.propTypes = {
-  register: PropTypes.func.isRequired
-}
-
-Register.defaultProps = {}
-
 Register.getInitialProps = async ctx => {
   checkServerSideAuthCookie(ctx)
   return {}
 }
 
-export default connect(
-  state => state,
-  { register }
-)(Register)
+export default Register

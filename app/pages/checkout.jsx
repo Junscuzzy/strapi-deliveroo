@@ -7,13 +7,13 @@ import { StripeProvider, Elements } from 'react-stripe-elements'
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 
-import Hero from '../components/hero'
+import Hero from '../components/layout/hero'
 import { checkServerSideAuthCookie } from '../actions/authActions'
 import { checkServerSideCartCookie } from '../actions/cartActions'
 import CartContainer from '../containers/cartContainer'
 import { hasToken } from '../lib/utils'
 import { stripeApiKey, stripeUrl } from '../config/api'
-import InjectedCheckoutForm from '../components/checkoutForm'
+import InjectedCheckoutForm from '../components/forms/checkoutForm'
 
 function Checkout(props) {
   const { cart, auth } = props

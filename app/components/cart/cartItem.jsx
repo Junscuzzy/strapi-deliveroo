@@ -11,7 +11,7 @@ import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline'
 import Fade from '@material-ui/core/Fade'
 
-import { apiUrl } from '../config/api'
+import { apiUrl } from '../../config/api'
 
 export default function CardItem({ addItem, removeItem, ...props }) {
   const { image, name, price, quantity } = props
