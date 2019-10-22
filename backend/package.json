@@ -21,6 +21,7 @@
     "body-parser": "^1.19.0",
     "knex": "latest",
     "lodash": "^4.17.11",
+    "pg": "^7.12.1",
     "sqlite3": "latest",
     "strapi": "3.0.0-beta.9",
     "strapi-admin": "3.0.0-beta.9",
