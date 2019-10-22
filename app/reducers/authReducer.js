@@ -3,15 +3,16 @@ import { authTypes } from '../actions/types'
 const { LOGIN, LOGOUT } = authTypes
 
 const initialState = {
-  token: ''
+  jwt: '',
+  user: {}
 }
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN:
-      return { ...state, token: action.token }
+      return { ...state, jwt: action.jwt, user: action.user }
     case LOGOUT:
-      return { ...state, token: '' }
+      return initialState
     default:
       return state
   }

@@ -4,12 +4,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import CardItem from '../components/cart/cartItem'
 import CartLayout from '../components/cart/cartLayout'
 import { addItem, removeItem } from '../actions/cartActions'
-import { hasToken } from '../lib/utils'
+import { hasJwt } from '../lib/utils'
 
 export default function CartContainer() {
   const { items, total } = useSelector(state => state.cart)
-  const { token } = useSelector(state => state.auth)
-  const isAuth = hasToken(token)
+  const { jwt } = useSelector(state => state.auth)
+  const isAuth = hasJwt(jwt)
   const dispatch = useDispatch()
   return (
     <CartLayout total={total} isAuth={isAuth}>

@@ -5,7 +5,7 @@ import Router from 'next/router'
 
 import InjectedCheckoutForm from '../components/forms/checkoutForm'
 import { stripeApiKey, stripeUrl } from '../config/api'
-import { hasToken } from '../lib/utils'
+import { hasJwt } from '../lib/utils'
 
 function CheckoutFormContainer() {
   const { cart, auth } = useSelector(state => state)
@@ -13,7 +13,7 @@ function CheckoutFormContainer() {
 
   // Redirect if user is not logged-in or if cart is empty
   useEffect(() => {
-    const isAuth = hasToken(auth.token)
+    const isAuth = hasJwt(auth.jwt)
     const itemsCount = cart.items ? cart.items.length : 0
     if (itemsCount === 0 || !isAuth) {
       Router.push('/')

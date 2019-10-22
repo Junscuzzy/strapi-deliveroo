@@ -1,4 +1,6 @@
-import { strapi } from '../config/api'
+import axios from 'axios'
+
+import { apiUrl } from '../config/api'
 import { restaurantTypes } from './types'
 
 const { GET_POSTS, FILTER_POSTS, LOADING_POSTS } = restaurantTypes
@@ -6,10 +8,13 @@ const { GET_POSTS, FILTER_POSTS, LOADING_POSTS } = restaurantTypes
 export const getPosts = () => dispatch => {
   dispatch({ type: LOADING_POSTS })
 
-  return strapi.getEntries('restaurants').then(response => {
-    const posts = response.map(post => ({ ...post, visible: true }))
-    dispatch({ type: GET_POSTS, posts })
-  })
+  return axios
+    .get(`${apiUrl}/restaurants`, {})
+    .then(({ data }) => {
+      const posts = data.map(post => ({ ...post, visible: true }))
+      dispatch({ type: GET_POSTS, posts })
+    })
+    .catch(error => console.log('An error occurred:', error))
 }
 
 export const filterPosts = search => (dispatch, getState) => {
