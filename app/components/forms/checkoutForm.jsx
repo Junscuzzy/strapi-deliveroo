@@ -56,7 +56,6 @@ function CheckoutForm({ stripe }) {
           validationSchema={validationSchema}
           render={({ isValid, isSubmitting, isValidating }) => (
             <Form>
-              {console.log({ isValid, isSubmitting, isValidating })}
               <Grid container spacing={4}>
                 <Grid item xs={12}>
                   <Field name="name" label="Full name" component={TextInput} />

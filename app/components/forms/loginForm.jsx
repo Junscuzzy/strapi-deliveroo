@@ -25,15 +25,10 @@ const validationSchema = Yup.object({
 
 function LoginForm() {
   const dispatch = useDispatch()
-  const submit = async (values, actions) => {
-    actions.setSubmitting(false)
-    dispatch(login(values))
-  }
-
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={(values, actions) => submit(values, actions)}
+      onSubmit={values => dispatch(login(values))}
       validationSchema={validationSchema}
       render={({ isValid }) => (
         <Form>

@@ -59,7 +59,7 @@ export const clearCart = () => dispatch => {
 export const createOrder = ({ stripe, values }) => (dispatch, getState) => {
   const {
     cart: { items, total },
-    auth: { token: authToken }
+    auth: { jwt }
   } = getState()
   stripe
     .createToken({
@@ -82,7 +82,7 @@ export const createOrder = ({ stripe, values }) => (dispatch, getState) => {
           },
           {
             headers: {
-              Authorization: `Bearer ${authToken}`
+              Authorization: `Bearer ${jwt}`
             }
           }
         )
@@ -91,9 +91,15 @@ export const createOrder = ({ stripe, values }) => (dispatch, getState) => {
           dispatch({ type: ORDER, status: statusText })
           Router.push('/')
         })
-        .catch(() => dispatch({ type: ORDER, status: 'failed' }))
+        .catch(error => {
+          console.log('An error occurred:', error)
+          dispatch({ type: ORDER, cmd: { status: 'failed', error } })
+        })
     )
-    .catch(() => dispatch({ type: ORDER, status: 'failed' }))
+    .catch(error => {
+      console.log('An error occurred:', error)
+      dispatch({ type: ORDER, cmd: { status: 'failed', error } })
+    })
 }
 
 // Get cart from the cookie and save it in the store

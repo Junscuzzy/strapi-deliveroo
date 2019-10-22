@@ -6,7 +6,8 @@ const initialState = {
   items: [],
   total: 0,
   cmd: {
-    status: null
+    status: null,
+    error: null
   }
 }
 
@@ -17,7 +18,7 @@ const restaurantReducer = (state = initialState, action) => {
     case REMOVE_ITEM:
       return { ...state, ...action.cart }
     case ORDER:
-      return { ...state, cmd: { status: action.status } }
+      return { ...state, cmd: action.cmd }
     case CLEAR_CART:
       return initialState
     case LOAD_CART:
